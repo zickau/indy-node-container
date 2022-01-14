@@ -1,7 +1,7 @@
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '55 16 * * *'
+    - cron:  '55 7 * * *'
 name: Slack Notification Demo
 jobs:
   slackNotification:
