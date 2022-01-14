@@ -1,16 +1,9 @@
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '00 8 * * *'
-name: Slack Notification Demo
-jobs:
-  slackNotification:
-    name: Slack Notification
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
+    - cron:  '15 8 * * *'
+    - name: Slack Notify
+      uses: rtCamp/action-slack-notify@v2.2.0
       env:
         SLACK_CHANNEL: docker_indy-node
         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
