@@ -3,12 +3,13 @@ name: Slack Action Message Test
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '20 11 * * *'
+    - cron:  '20 12 * * *'
     jobs:
       slackNotification:
         name: Slack Notification
         runs-on: ubuntu-latest
         steps:
+          - uses: actions/checkout@v2
           - name: Slack Notify
             uses: rtCamp/action-slack-notify@v2.2.0
             env:
