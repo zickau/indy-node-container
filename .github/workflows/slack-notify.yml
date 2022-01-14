@@ -1,14 +1,12 @@
 on:
   schedule:
     - cron:  '30 12 * * *'
-name: Slack Notification Demo
+  workflow_dispatch:
 jobs:
-  slackNotification:
-    name: Slack Notification
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2.2.0
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  notify-job:
+  uses: actions/checkout@v2
+   slack_notify:
+    - name: notify
+        uses: rtCamp/action-slack-notify@v2.2.0
+        with:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
