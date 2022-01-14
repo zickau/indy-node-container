@@ -3,8 +3,7 @@ name: Slack Action Message Test
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '25 8 * * *'
-    name: Slack Notification Demo
+    - cron:  '20 11 * * *'
     jobs:
       slackNotification:
         name: Slack Notification
