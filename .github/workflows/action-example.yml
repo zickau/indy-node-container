@@ -1,5 +1,7 @@
 name: learn-github-actions
-on: [push]
+on:
+  schedule:
+  - cron:  '35 15 * * *'
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
@@ -10,4 +12,3 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
-      
