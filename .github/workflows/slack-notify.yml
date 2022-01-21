@@ -1,18 +1,19 @@
 name: slack-notify
 on:
   schedule:
-    - cron:  '30 12 * * *'
-  workflow_dispatch:
+  - cron:  '30 12 * * *'
 jobs:
   notify-job:
-  steps:
-    - uses: 8398a7/action-slack@v3.12.0
-      with:
-        status: ${{ job.status }}
-        author_name: Integration Test # default: 8398a7@action-slack
-        fields: repo,commit,message,author # default: repo,commit
-        mention: here
-        if_mention: failure,cancelled
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
-      if: always() # Pick up events even if the job fails or is canceled.
+    runs-on: ubuntu-latest
+    steps:
+      - name: action-slack
+        uses: 8398a7/action-slack@v3.12.0
+        with:
+          status: ${{ job.status }}
+          author_name: Integration Test # default: 8398a7@action-slack
+          fields: repo,commit,message,author # default: repo,commit
+          mention: here
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
