@@ -6,14 +6,8 @@ jobs:
   notify-job:
     runs-on: ubuntu-latest
     steps:
-      - name: action-slack
-        uses: 8398a7/action-slack@v3.12.0
-        with:
-          status: ${{ job.status }}
-          author_name: Integration Test # default: 8398a7@action-slack
-          fields: repo,commit,message,author # default: repo,commit
-          mention: here
-          if_mention: failure,cancelled
+      - name: Send GitHub Action trigger data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.17.0
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
