@@ -1,9 +1,9 @@
 name: Trivy Analysis (indy_node:latest)
 
 on:
-  schedule:
+  # schedule:
     # run every Wednesday at 23:20
-    - cron: '20 23 * * 3'
+    # - cron: '20 23 * * 3'
   workflow_dispatch:
 
 
