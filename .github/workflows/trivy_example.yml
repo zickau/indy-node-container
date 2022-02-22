@@ -1,9 +1,6 @@
 name: Trivy Example
 
 on:
-  # schedule:
-    # run every Wednesday at 23:20
-    # - cron: '20 23 * * 3'
   workflow_dispatch:
 
 
@@ -22,17 +19,8 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'ghcr.io/zickau/indy-node-container/indy_node:latest-${{ matrix.os_version }}'
-          format: 'json'
-          output: 'trivy_example.txt'
+          format: 'table'
+          exit-code: '1'
           ignore-unfixed: true
+          vuln-type: 'os,library'
           severity: 'CRITICAL'
-      
-      - name: Patch tool name for ${{ matrix.os_version }} scan
-        run: |
-          sed -i 's/"name": "Trivy",/"name": "Trivy${{ matrix.os_version }}Latest",/g' trivy_example.txt
-      - name: 'trivy_example.txt'
-        uses: actions/upload-artifact@v2
-        with:
-          name: trivy_example.txt
-          path: trivy_example.txt
-          retention-days: 8
