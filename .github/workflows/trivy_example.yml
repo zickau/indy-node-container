@@ -5,11 +5,11 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: trivy_scan
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      #- name: Checkout code
+      #  uses: actions/checkout@v2
       
       #- name: Build an image from Dockerfile
       #  run: |
