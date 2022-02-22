@@ -3,22 +3,18 @@ name: Trivy Example
 on:
   workflow_dispatch:
 
-
 jobs:
   trivy_analysis:
     name: Trivy Analysis of Indy Node Images
-    runs-on: "ubuntu-20.04"
-    strategy:
-      matrix:
-        os_version: [ ubuntu18 ]
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Trivy on indy_node:${{ matrix.os_version }}
+      - name: Run Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'ghcr.io/zickau/indy-node-container/indy_node:latest-${{ matrix.os_version }}'
+          image-ref: 'ghcr.io/zickau/indy-node-container/indy_node:latest-ubuntu18'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
