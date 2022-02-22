@@ -30,7 +30,7 @@ jobs:
       - name: Patch tool name for ${{ matrix.os_version }} scan
         run: |
           sed -i 's/"name": "Trivy",/"name": "Trivy${{ matrix.os_version }}Latest",/g' trivy_example.txt
-      - name: 'Safe trivy-indy-node-${{ matrix.os_version }}.txt'
+      - name: 'trivy_example.txt'
         uses: actions/upload-artifact@v2
         with:
           name: trivy_example.txt
