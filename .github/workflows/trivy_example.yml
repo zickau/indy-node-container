@@ -1,4 +1,4 @@
-name: Trivy Analysis (indy_node:latest)
+name: Trivy Example
 
 on:
   # schedule:
