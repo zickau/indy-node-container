@@ -26,8 +26,7 @@ jobs:
       - name: Slack message    
         uses: 8398a7/action-slack@v3.12.0
         with:
-          status: custom
-          custom_payload: 'trivy_result.txt'
+          text: 'Hello, World'
           # fields: repo,message # commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
