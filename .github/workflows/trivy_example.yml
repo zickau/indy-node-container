@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: trivy_result.txt
+          path: /output/trivy_result.txt
       
       - name: Download a single artifact
         uses: actions/download-artifact@v2
