@@ -23,12 +23,7 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: trivy_result
-  
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-      
+       
       - name: Slack message    
         uses: 8398a7/action-slack@v3.12.0
         with:
