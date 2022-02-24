@@ -22,11 +22,11 @@ jobs:
           format: 'table'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          output: 'trivy_result.txt'
+          # output: 'trivy_result.txt'
       - name: Slack message    
         uses: 8398a7/action-slack@v3.12.0
         with:
-          text: 'Hello, World'
+          # text: 'Hello, World'
           fields: repo,message,job # commit,author,action,eventName,ref,workflow,took,pullRequest # selectable (default: repo,message)
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
