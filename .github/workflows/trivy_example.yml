@@ -22,7 +22,19 @@ jobs:
           format: 'table'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          # output: 'trivy_result.txt'
+          output: 'trivy_result.txt'
+  
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: trivy_result.txt
+      
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+      
       - name: Slack message    
         uses: 8398a7/action-slack@v3.12.0
         with:
