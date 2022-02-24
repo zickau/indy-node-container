@@ -22,13 +22,14 @@ jobs:
           format: 'json'
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          output: trivy_result
+          output: 'trivy_result.txt'
        
       - name: Slack message    
         uses: 8398a7/action-slack@v3.12.0
         with:
           status: custom
-          custom_payload: trivy_result
+          custom_payload: | 
+            trivy_result.txt
           text: 'Hello, World'
           fields: repo,message,job # commit,author,action,eventName,ref,workflow,took,pullRequest # selectable (default: repo,message)
         env:
