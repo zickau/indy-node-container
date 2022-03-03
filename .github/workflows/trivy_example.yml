@@ -45,7 +45,16 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.18.0
         with:
-          slack-message: "Trivy Scan Summary is: ${{ env.SUMMARY }} "
+          payload: |
+            {
+              "text":"GitHub Action build result",
+              "blocks":[
+                {
+                  "type":"section",
+                  "text":${{ env.SUMMARY }}
+                }
+              ]
+            }
         env:
            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
