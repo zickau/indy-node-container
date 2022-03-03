@@ -31,9 +31,6 @@ jobs:
         uses: andstor/file-reader-action@v1.0.0
         with:
           path: "results.json"
-
-      - name: File contents
-        run: echo "${ steps.read_file.outputs.contents }"
       
       - name: Create Issues Summary
         run: |
