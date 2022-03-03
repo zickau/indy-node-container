@@ -37,12 +37,12 @@ jobs:
 
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.Vulnerabilities.VulnerabilityID | tostring' results.json | tr -d \\)
+          summary=$(jq '.[] | .Vulnerabilities | tostring' results.json | tr -d \\)
           if [ -z $summary ]
           then
             summary="0 Issues"
           fi
-          echo "SUMMARY=$summary" >> $GITHUB_ENV
+          echo "SUMMARY=$summary"
 
       - name: Send custom JSON data to Slack workflow
         id: slack
