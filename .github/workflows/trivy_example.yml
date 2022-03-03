@@ -51,7 +51,7 @@ jobs:
               "blocks":[
                 {
                   "type":"section",
-                  "text":${{ env.SUMMARY }}
+                  "text":"${{ env.SUMMARY }}"
                 }
               ]
             }
