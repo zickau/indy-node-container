@@ -39,7 +39,7 @@ jobs:
           then
             summary="0 Issues"
           fi
-          echo "SUMMARY=$summary"
+          echo "SUMMARY=$summary" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -47,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "GitHub Action build result: $summary"
+              "text": "GitHub Action build result: ${{ env.SUMMARY }}"
             }
         env:
            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
