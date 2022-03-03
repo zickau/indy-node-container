@@ -19,8 +19,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'ghcr.io/idunion/indy-node-container/indy_node:latest-ubuntu18'
-          scan-type: 'fs'
-          input: '.'
+          scan-type: 'image'
           ignore-unfixed: true
           format: json
           output: 'results.json'
