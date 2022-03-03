@@ -34,7 +34,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.[] | .References | tostring' results.json)
+          summary=$(jq '.[] | .References' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
