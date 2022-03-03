@@ -34,7 +34,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.Results | .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH")' results.json)
+          summary=$(jq '.Results' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
@@ -48,12 +48,7 @@ jobs:
           payload: |
             {
               "text": "GitHub Action build result: ${{ env.SUMMARY }}"
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": ${{ env.SUMMARY }}
-                }
-              ]
+              "blocks": ${{ env.SUMMARY }}
             }
         env:
            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
