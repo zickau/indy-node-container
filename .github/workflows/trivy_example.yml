@@ -26,6 +26,11 @@ jobs:
           # Ignoring the go.sum file as it may contain the older dependencies entries which are not being used now.
           skip-dirs: 'go.sum'
 
+      - uses: pCYSl5EDgo/cat@master
+        id: hello
+        with:
+          path: results.json
+
       - name: Create Issues Summary
         run: |
           summary=$(jq '.[] | .Results.Vulnerabilities.VulnerabilityID | tostring' results.json)
