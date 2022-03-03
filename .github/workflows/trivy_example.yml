@@ -34,7 +34,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.Metadata.OS' results.json)
+          summary=$(jq '.SchemaVersion' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
@@ -46,7 +46,15 @@ jobs:
         uses: slackapi/slack-github-action@v1.18.0
         with:
           payload: |
-            ${{ env.SUMMARY }}
+            {
+              "text":"GitHub Action build result",
+              "blocks":[
+                {
+                  "type":"section",
+                  "text":${{ env.SUMMARY }}
+                }
+              ]
+            }
         env:
            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
