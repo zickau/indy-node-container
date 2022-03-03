@@ -34,7 +34,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.SchemaVersion | tostring' results.json)
+          summary=$(jq '.SchemaVersion' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
@@ -47,16 +47,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "GitHub Action build result: ${{ env.SUMMARY }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ env.SUMMARY }}"
-                  }
-                }
-              ]
+              "text": "GitHub Action build result: $summary"
             }
         env:
            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
