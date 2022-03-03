@@ -37,7 +37,7 @@ jobs:
 
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.[] | select(.Vulnerabilities) | .Vulnerabilities | group_by(.Severity) | map({Severity: .[0].Severity, Count: length}) | tostring' results.json | tr -d \\)
+          summary=$(jq '.[] | select(.Vulnerabilities) | .VulnerabilityID | group_by(.Severity) | map({Severity: .[0].Severity, Count: length}) | tostring' results.json | tr -d \\)
           if [ -z $summary ]
           then
             summary="0 Issues"
