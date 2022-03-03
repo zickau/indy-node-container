@@ -34,7 +34,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq '.SchemaVersion' results.json)
+          summary=$(jq '.SchemaVersion | tostring' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
