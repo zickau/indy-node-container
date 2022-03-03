@@ -20,10 +20,12 @@ jobs:
         with:
           image-ref: 'ghcr.io/idunion/indy-node-container/indy_node:latest-ubuntu18'
           scan-type: 'fs'
-          format: 'json'
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          input: '.'
+          ignore-unfixed: true
+          format: json
           output: 'results.json'
+          # Ignoring the go.sum file as it may contain the older dependencies entries which are not being used now.
+          skip-dirs: 'go.sum'
 
       - name: Create Issues Summary
         run: |
