@@ -26,11 +26,15 @@ jobs:
           # Ignoring the go.sum file as it may contain the older dependencies entries which are not being used now.
           skip-dirs: 'go.sum'
 
-      - uses: pCYSl5EDgo/cat@master
-        id: hello
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1.0.0
         with:
-          path: results.json
+          path: "results.json"
 
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
+      
       - name: Create Issues Summary
         run: |
           summary=$(jq '.[] | .Results.Vulnerabilities.VulnerabilityID | tostring' results.json)
