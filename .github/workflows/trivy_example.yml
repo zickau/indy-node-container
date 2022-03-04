@@ -56,10 +56,8 @@ jobs:
                     "type": "mrkdwn",
                     "text": "**CVE Found**: "
                 }
-              }
-            ],
-            [
-                {
+              },
+              {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
