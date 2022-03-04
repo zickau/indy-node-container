@@ -20,6 +20,7 @@ jobs:
         with:
           image-ref: 'ghcr.io/idunion/indy-node-container/indy_node:latest-ubuntu18'
           scan-type: 'image'
+          severity: 'CRITICAL'
           ignore-unfixed: true
           format: json
           output: 'results.json'
