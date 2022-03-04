@@ -47,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-              "text": ${{ env.SUMMARY }},
+              "text": "GitHub Action build result: ",
               "blocks": ${{ env.SUMMARY }}
             }
         env:
