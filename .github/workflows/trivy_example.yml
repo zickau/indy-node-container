@@ -54,6 +54,15 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
+                    "text": "**CVE Found**: "
+                }
+              }
+            ],
+            [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
                     "text": ${{ env.SUMMARY }}
                 }
               }
