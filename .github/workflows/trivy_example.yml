@@ -47,7 +47,7 @@ jobs:
         with:
           payload: |
             {
-              "text": ${{ env.SUMMARY }}
+              "text": ${{ env.SUMMARY }},
               "blocks": ${{ env.SUMMARY }}
             }
         env:
