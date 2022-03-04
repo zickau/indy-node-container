@@ -48,7 +48,7 @@ jobs:
         with:
           payload: |
             {
-              "text": ${{ env.SUMMARY }},
+              "text": "CVE found: ",
               "blocks": [
                 {
                   "type": "section",
