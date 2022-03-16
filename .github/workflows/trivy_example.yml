@@ -35,7 +35,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq -jr ' .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH") | .VulnerabilityID' results.json)
+          summary=$(jq -jr ' .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
@@ -54,7 +54,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*CVEs (HIGH,CRITICAL) found*: "
+                    "text": "*CVEs (HIGH,CRITICAL) found in ubuntu-18.04*: "
                 }
               },
               {
