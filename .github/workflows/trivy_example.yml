@@ -35,7 +35,7 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq ' .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' results.json)
+          summary=$(jq -jr ' .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' results.json)
           if [ -z $summary ]
           then
             summary="0 Issues"
@@ -61,7 +61,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ env.SUMMARY }}
+                    "text": "${{ env.SUMMARY }}"
                 }
               }
             ]
