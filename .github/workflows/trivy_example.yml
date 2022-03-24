@@ -63,12 +63,12 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq -jr '.Results | .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' results.json)
-          if [ -z $summary ]
+          summary=$(jq -jr '.Results | .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' trivy-indy-node-${{ matrix.os_version }}.json)
+          if [ -z $summary-${{ matrix.os_version }} ]
           then
             summary="0 Issues"
           fi
-          echo "SUMMARY=$summary" >> $GITHUB_ENV
+          echo "SUMMARY-${{ matrix.os_version }}=$summary" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -82,14 +82,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*CVEs (HIGH,CRITICAL) found in ubuntu-18.04*: "
+                    "text": "*CVEs (HIGH,CRITICAL) found in ${{ matrix.os_version }}: "
                 }
               },
               {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ env.SUMMARY }}"
+                    "text": "${{ env.SUMMARY-${{ matrix.os_version }} }}"
                 }
               }
             ]
