@@ -19,10 +19,21 @@ jobs:
         run: echo "::set-output name=lowercase::$(echo ${{ github.repository_owner }} | tr \"[:upper:]\" \"[:lower:]\")"
         shell: bash
 
-  build:
-    name: trivy_scan
-    runs-on: ubuntu-18.04
+  trivy_analysis:
+    name: Trivy Analysis of Indy Node Images
+    runs-on: "ubuntu-20.04"
+    needs: workflow_setup
+    strategy:
+      matrix:
+        os_version: [ bullseye, buster, ubuntu16, ubuntu18, ubuntu20 ]
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+  #build:
+    #name: trivy_scan
+    #runs-on: ubuntu-18.04
+    #steps:
       #- name: Checkout code
       #  uses: actions/checkout@v2
       
@@ -30,15 +41,17 @@ jobs:
       #  run: |
       #    docker build -t docker.io/zickau/indy-node-container/build/Dockerfile.ubuntu18 .
       
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner for Slack messages on indy_node:${{ matrix.os_version }}
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'ghcr.io/idunion/indy-node-container/indy_node:latest-ubuntu18'
+          #image-ref: 'ghcr.io/idunion/indy-node-container/indy_node:latest-ubuntu18'
+          image-ref: 'ghcr.io/${{ needs.workflow_setup.outputs.repo_owner }}/indy-node-container/indy_node:latest-${{ matrix.os_version }}'
           scan-type: 'image'
           severity: 'HIGH,CRITICAL'
           ignore-unfixed: true
           format: json
-          output: 'results.json'
+          #output: 'results.json'
+          output: 'trivy-indy-node-${{ matrix.os_version }}.json'
           # Ignoring the go.sum file as it may contain the older dependencies entries which are not being used now.
           skip-dirs: 'go.sum'
 
@@ -46,7 +59,7 @@ jobs:
         id: read_file
         uses: andstor/file-reader-action@v1.0.0
         with:
-          path: "results.json"
+          path: "trivy-indy-node-${{ matrix.os_version }}.json"
       
       - name: Create Issues Summary
         run: |
