@@ -63,12 +63,12 @@ jobs:
       
       - name: Create Issues Summary
         run: |
-          summary=$(jq -jr '.Results | .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' trivy-indy-node-${{ matrix.os_version }}.json)
+          summary-${{ matrix.os_version }}=$(jq -jr '.Results | .[] | .Vulnerabilities | .[] | select(.Severity=="HIGH" or .Severity=="CRITICAL") | .VulnerabilityID' trivy-indy-node-${{ matrix.os_version }}.json)
           if [ -z $summary-${{ matrix.os_version }} ]
           then
             summary="0 Issues"
           fi
-          echo "SUMMARY-${{ matrix.os_version }}=$summary" >> $GITHUB_ENV
+          echo "SUMMARY-${{ matrix.os_version }}=$summary-${{ matrix.os_version }}" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
