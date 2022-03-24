@@ -55,11 +55,22 @@ jobs:
           # Ignoring the go.sum file as it may contain the older dependencies entries which are not being used now.
           skip-dirs: 'go.sum'
 
-      - name: Read file contents
-        id: read_file
-        uses: andstor/file-reader-action@v1.0.0
+      #- name: Read file contents
+        #id: read_file
+        #uses: andstor/file-reader-action@v1.0.0
+        #with:
+        #  path: "trivy-indy-node-${{ matrix.os_version }}.json"
+      
+      #- name: Patch tool name for ${{ matrix.os_version }} scan
+       # run: |
+        #  sed -i 's/"name": "Trivy",/"name": "Trivy${{ matrix.os_version }}Latest",/g' trivy-indy-node-${{ matrix.os_version }}.json
+
+      - name: 'Safe trivy-indy-node-${{ matrix.os_version }}.json'
+        uses: actions/upload-artifact@v2
         with:
-          path: "trivy-indy-node-${{ matrix.os_version }}.json"
+          name: trivy-indy-node-${{ matrix.os_version }}.json
+          path: trivy-indy-node-${{ matrix.os_version }}.json
+          retention-days: 8
       
       - name: Create Issues Summary
         run: |
