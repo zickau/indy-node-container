@@ -100,7 +100,6 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    # "text": "${{ env.SUMMARY-${{ matrix.os_version }} }}"
                     "text": "${{ $summary-${{ matrix.os_version }} }}"
                 }
               }
